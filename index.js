@@ -9,8 +9,11 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.get('/', (req, res) => {
+    res.send("GET Request Called");
+});
+
 app.post("/translator", async (req, res) => {
-   
     const { url, sourceLng, targetLanguage } = req.body;
     function fetchHTML(url) {
         https.get(url, (response) => {
@@ -39,11 +42,9 @@ app.post("/translator", async (req, res) => {
         });
     }
 
-
     fetchHTML(url);
     // fetchHTML("https://example.com/");
 });
-
 
 const port = process.env.PORT || 4000;
 app.listen(port, () => {
